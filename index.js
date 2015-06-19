@@ -38,7 +38,6 @@ function Camera(newAddress) {
 		if (basePath === undefined)
 			throw new Error('Invalid command type "'+type+'". Use one of the following types: "movement", "static"')
 		const url = ['http://', address, '/', basePath, 'cmd=', command, '&res=1'].join('')
-		console.log(url)
 		httpRequest(url, callback)
 	}
 }
@@ -51,6 +50,18 @@ Camera.prototype.gotoPreset = function(number) {
 	var presetString = ('00'+presetNumber)
 	presetString = presetString.substr(presetString.length - 2)
 	this.sendCommand('movement', '%23R' + presetString)
+}
+
+Camera.prototype.getTallyLight = function(callback) {
+	// calls the calback with true when the light is on, false when the light is off
+	var cam = this
+	cam.sendCommand('movement', '%23TAE', function(error, response, body) {
+		if (body == 'tAE1')
+			cam.sendCommand('movement', '%23DA', function(error, response, body) {
+				callback(body == 'dA1')
+			})
+		else callback(false)
+	})
 }
 
 const basePaths = {
