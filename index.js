@@ -43,13 +43,11 @@ function Camera(newAddress) {
 }
 
 Camera.prototype.gotoPreset = function(number) {
-	const presetNumber = parseInt(number)
-	if (presetNumber == NaN || presetNumber > 99 || presetNumber < 0) {
-		throw new Error('Invalid preset number, it must be an integer in the range [0,99]')
-	}
-	var presetString = ('00'+presetNumber)
-	presetString = presetString.substr(presetString.length - 2)
-	this.sendCommand('movement', '%23R' + presetString)
+	this.sendCommand('movement', '%23R' + presetStringFor(number))
+}
+
+Camera.prototype.savePreset = function(number) {
+	this.sendCommand('movement', '%23M' + presetStringFor(number))
 }
 
 Camera.prototype.getTallyLight = function(callback) {
@@ -62,6 +60,15 @@ Camera.prototype.getTallyLight = function(callback) {
 			})
 		else callback(false)
 	})
+}
+
+function presetStringFor(number) {
+	const presetNumber = parseInt(number)
+	if (presetNumber == NaN || presetNumber > 99 || presetNumber < 0) {
+		throw new Error('Invalid preset number, it must be an integer in the range [0,99]')
+	}
+	var presetString = ('00'+presetNumber)
+	return presetString.substr(presetString.length - 2)
 }
 
 const basePaths = {
