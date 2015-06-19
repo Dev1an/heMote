@@ -14,5 +14,8 @@
     "remote"
   ],
   "author": "Devian",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.58.0"
+  }
 }
