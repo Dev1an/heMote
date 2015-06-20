@@ -1,5 +1,5 @@
 {
-  "name": "heMote",
+  "name": "hemote",
   "version": "0.0.1",
   "description": "Control Panasonic HE-120 cameras",
   "main": "index.js",
@@ -13,7 +13,7 @@
     "controller",
     "remote"
   ],
-  "author": "Devian",
+  "author": "devian",
   "license": "ISC",
   "dependencies": {
     "request": "^2.58.0"
