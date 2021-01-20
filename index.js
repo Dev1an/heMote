@@ -40,6 +40,10 @@ function Camera(newAddress) {
 		const url = ['http://', address, '/', basePath, 'cmd=', command, '&res=1'].join('')
 		httpRequest(url, callback)
 	}
+	this.batchInfo = function(callback) {
+		const url = ['http://', address, '/','live/camdata.html'].join('')
+		httpRequest(url, callback)
+	}
 }
 
 Camera.prototype.gotoPreset = function(number) {
